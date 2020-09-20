@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:include="_template :: head">
+		<meta charset="UTF-8">
+	</head>
+	
+	<body>
+		<h1>Tarefas a serem feitas</h1>
+	
+		<nav th:include="_template :: menu('task')"></nav>
+		
+			<a href="/task/new" class="btn-sm btn-primary">
+				<span class="material-icons">add</span>
+			</a>
+		
+		<span class="alert" th:if="${msg != null}" th:text="${msg}"></span>
+		
+		<div class="tasks">
+			<div class="card-task"  th:each="task : ${tasks}">
+				<h2 th:text="${task.title}"></h2>
+				<div class="point">
+					<span class="material-icons">star</span>
+					<span th:text="${task.point}"></span>
+				</div> 
+			
+				<div class="status">
+					
+					<div class="number">
+						<h2 th:text="${task.status}"></h2>
+					</div>
+				</div>
+				
+				<button class="btn-hand">
+					<span class="material-icons">pan_tool</span>
+				</button>
+				<a th:href="${'/task/' + task.id}" class="btn btn-sm yellow">
+					<span class="material-icons">edit</span>
+				</a>
+			</div>
+		</div>
+		
+	</body>
+</html>
