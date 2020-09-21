@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:include="_template :: head">
+		<meta charset="UTF-8">
+	</head>
+	
+	<body>
+	
+		<div class="content">
+			<h2>Cadastrar nova <i>tarefa</i></h2>
+			<form action="/task" method="POST" th:object="${task}">
+				<input 
+					name="title"
+					type="text"
+					placeholder="Titulo da tarefa"
+					th:classappend="${#fields.hasErrors('title')} ? invalid"
+				/>
+				<span th:errors="*{title}"></span>
+				
+				<input 
+					name="description"
+					type="text"
+					placeholder="Descrição da tarefa"
+					th:classappend="${#fields.hasErrors('description')} ? invalid"
+				/>
+				<span th:errors="*{description}"></span>
+				
+				<label>Pontos</label>
+				<input name="point" type="number" min="1" max="100" id="point"/>
+				<input name="point" type="range" min="1" max="100" id="range-point" />
+				
+				<label>Situação</label>
+				<input name="status" type="number" min="1" max="100" id="status"/>
+				<input name="status" type="range" min="1" max="100" id="range-status" />
+				
+				<div class="actions">
+					<a href="/task" class="btn">Cancelar</a>
+					<button class="btn blue">Salvar</button>
+				</div>
+			</form>
+		</div>
+		
+		<script>
+			document.querySelector("#range-point").addEventListener("input", 
+					(e) => document.querySelector("#point").value= (e.target.value) 
+			)
+			document.querySelector("#point").addEventListener("change", 
+					(e) => document.querySelector("#range-point").value= (e.target.value) 
+			)
+			
+			document.querySelector("#range-status").addEventListener("input", 
+					(e) => document.querySelector("#status").value= (e.target.value) 
+			)
+			document.querySelector("#status").addEventListener("change", 
+					(e) => document.querySelector("#range-status").value= (e.target.value) 
+			)
+		</script>
+	</body>
+</html>
